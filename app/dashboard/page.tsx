@@ -9,7 +9,7 @@ import { useUser } from '@clerk/nextjs';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from 'aspect-ui/Accordion';
 import { Button } from 'aspect-ui/Button';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const Page = () => {
   const { user } = useUser();
@@ -30,14 +30,8 @@ const Page = () => {
   console.log(accordions)
   console.log(currentAccordion, loading, error)
 
-  const fetchAccordions = async () => {
+  const fetchAccordions = useCallback(async () => {
     if (!user?.id) return;
-
-    console.log("Fetching accordions with:", {
-      userId: user.id,
-      status: postStatus,
-      page: currentPage,
-    });
 
     setLoading(true);
     setError(null);
@@ -53,34 +47,23 @@ const Page = () => {
       }
 
       const result = await response.json();
-      console.log("API response:", result);
-
       const { data, meta: { totalPages } } = result;
 
-      if (!data) {
-        setAccordions([]);
-      } else {
-        setAccordions(data);
-      }
-
+      setAccordions(data || []);
       setTotalPages(totalPages);
 
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-        console.error("Error fetching accordions:", err);
-      } else {
-        setError("An unknown error occurred");
-        console.error("Error fetching accordions:", err);
-      }
+      const message = err instanceof Error ? err.message : "An unknown error occurred";
+      setError(message);
+      console.error("Error fetching accordions:", err);
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => {
+  }, [user?.id, postStatus, currentPage]);
 
+  useEffect(() => {
     fetchAccordions();
-  });
+  }, [fetchAccordions]);
 
 
   const handlePageChange = (page: number) => {

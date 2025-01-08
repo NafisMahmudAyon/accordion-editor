@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import Editor from "./Editor";
 import { GlobalOptionsType, ItemOptionsType } from "./Global";
 import IconSelector from "./icons/IconSelector";
+import { cn } from "./utils/cn";
 // import { cn } from "./utils/cn";
 
 interface AccordionPreviewProps {
@@ -67,12 +68,12 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 								id={`item-${index + 1}`}
 								disabled={item.disabled === true ? true : false}>
 								<AccordionHeader
-									iconEnabled={item.iconEnabled}
-									iconPosition={item.iconPosition}
-									iconClassName={item.iconClassName}
-									activeIconClassName={item.activeIconClassName}
+									iconEnabled={item.iconEnabled ? item.iconEnabled : globalOptions.iconEnabled}
+									iconPosition={item.iconPosition ? item.iconPosition : globalOptions.iconPosition}
+									iconClassName={cn(globalOptions.inactiveIconClassName, item.iconClassName)}
+									activeIconClassName={cn(globalOptions.activeIconClassName, item.activeIconClassName)}
 									activeIcon={
-										item.activeIcon ? (
+										item.activeIcon.length > 0 ? (
 											<IconSelector
 												iconType={item.activeIconType}
 												iconName={item.activeIcon}
@@ -85,7 +86,7 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 										)
 									}
 									inactiveIcon={
-										item.inactiveIcon ? (
+										item.inactiveIcon.length > 0 ? (
 											<IconSelector
 												iconType={item.inactiveIconType}
 												iconName={item.inactiveIcon}
@@ -97,10 +98,10 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 											/>
 										)
 									}
-									className={item.headerClassName}
-									labelClassName={item.labelClassName}
-									activeHeaderClassName={item.activeHeaderClassName}
-									activeLabelClassName={item.activeLabelClassName}>
+									className={cn(globalOptions.headerClassName, item.headerClassName)}
+									labelClassName={cn(globalOptions.labelClassName, item.labelClassName)}
+									activeHeaderClassName={cn(globalOptions.activeHeaderClassName, item.activeHeaderClassName)}
+									activeLabelClassName={cn(globalOptions.activeLabelClassName, item.activeLabelClassName)}>
 									{item.headerLabel}
 								</AccordionHeader>
 

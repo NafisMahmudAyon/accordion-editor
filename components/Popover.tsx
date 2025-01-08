@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from './utils/cn';
 
@@ -66,7 +66,7 @@ const Popover = ({
   //   return opposites[pos];
   // };
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     if (isOpen && triggerRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current?.getBoundingClientRect();
@@ -151,7 +151,7 @@ const Popover = ({
 
       setPopoverStyles({ top, left });
     }
-  };
+  }, [isOpen, position, forceDirection, offset]);
 
   useEffect(() => {
     if (isOpen) {
@@ -161,7 +161,7 @@ const Popover = ({
       const timeoutId = setTimeout(updatePosition, 0);
       return () => clearTimeout(timeoutId);
     }
-  });
+  }, [isOpen, content, updatePosition]);
 
   useEffect(() => {
     if (isOpen) {
@@ -177,7 +177,7 @@ const Popover = ({
         window.removeEventListener('resize', handleUpdate);
       };
     }
-  });
+  }, [isOpen, updatePosition]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -192,7 +192,7 @@ const Popover = ({
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  });
+  },[onHover]);
 
   const getPopoverStyles = (): string => {
     const baseStyles = 'fixed bg-white rounded-lg shadow-lg border border-gray-200';

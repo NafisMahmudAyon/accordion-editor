@@ -1,4 +1,3 @@
-// import { AuthProvider } from '@/components/AuthContext';
 import Navbar from '@/components/Navbar';
 import {
   ClerkProvider
@@ -27,10 +26,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${poppins.variable} antialiased`}>
-          {/* <AuthProvider> */}
             <Navbar />
             {children}
-          {/* </AuthProvider> */}
         </body>
       </html>
     </ClerkProvider>
