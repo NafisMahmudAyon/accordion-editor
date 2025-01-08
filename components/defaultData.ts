@@ -31,7 +31,7 @@ export const defaultData: AccordionData = {
 			headerLabel: "Accordion 1",
 			content: "",
 			iconEnabled: true,
-			iconPosition: "",
+			iconPosition: undefined,
 			iconClassName: "size-6",
 			activeIconClassName: "size-6",
 			activeIcon: "",

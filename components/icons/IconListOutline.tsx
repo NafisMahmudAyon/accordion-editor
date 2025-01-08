@@ -324,7 +324,13 @@ import {
 	XCircleIcon,
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
-const iconsListOutline = [
+
+interface IconsListOutlineType {
+	name: string;
+	icon: React.ElementType;
+}
+
+const iconsListOutline: IconsListOutlineType[] = [
 	{
 		name: "academic-cap-icon",
 		icon: AcademicCapIcon,

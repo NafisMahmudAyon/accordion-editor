@@ -324,7 +324,13 @@ import {
 	XCircleIcon,
 	XMarkIcon,
 } from "@heroicons/react/24/solid";
-const iconsListSolid = [
+
+interface IconsListSolidType {
+	name: string;
+	icon: React.ElementType;
+}
+
+const iconsListSolid: IconsListSolidType[] = [
 	{
 		name: "academic-cap-icon",
 		icon: AcademicCapIcon,

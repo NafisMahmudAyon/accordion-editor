@@ -1,7 +1,8 @@
-'use client';
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
+import dynamic from "next/dynamic";
+import React, { useState } from "react";
+import "react-quill-new/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 interface EditorProps {
   value: string;
@@ -10,7 +11,6 @@ interface EditorProps {
 
 const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
   const [editorValue, setEditorValue] = useState(value || "");
-
 
   const modules = {
     toolbar: [

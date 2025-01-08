@@ -2,7 +2,13 @@ import React, { useMemo } from "react";
 import iconsListOutline from "./IconListOutline";
 import iconsListSolid from "./IconListSolid";
 
-const IconSelector = ({ iconType, iconName, className = "" }) => {
+interface IconSelectorProps{
+	iconType: string;
+	iconName: string;
+	className?: string
+}
+
+const IconSelector: React.FC<IconSelectorProps> = ({ iconType, iconName, className = "" }) => {
 	// Determine the icon list based on the type
 	const iconList = useMemo(
 		() => (iconType === "solid" ? iconsListSolid : iconsListOutline),

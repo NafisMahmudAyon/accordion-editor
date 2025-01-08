@@ -11,8 +11,6 @@
   "dependencies": {
     "@clerk/nextjs": "^6.9.6",
     "@heroicons/react": "^2.2.0",
-    "@lexical/file": "^0.23.0",
-    "@lexical/react": "^0.23.0",
     "@supabase/supabase-js": "^2.47.10",
     "aspect-ui": "^0.0.65",
     "cors": "^2.8.5",
