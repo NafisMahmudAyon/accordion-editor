@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/api/(.*)"]);
+const isPublicRoute = createRouteMatcher(["/", "/api/(.*)", "/accordion/(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
 	// Add CORS headers to the response

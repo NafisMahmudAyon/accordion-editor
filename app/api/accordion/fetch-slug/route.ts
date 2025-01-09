@@ -4,25 +4,14 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 
-	const id = searchParams.get("id");
 	const slug = searchParams.get("slug");
+	console.log(slug)
 
-	// if (!id || !slug) {
-	// 	return NextResponse.json({ error: "ID is requireda" }, { status: 400 });
-	// }
-
-	let query;
-
-	if (id) {
-		query = supabase.from("accordion").select("*").eq("id", id);
-	}
-	if (slug) {
-		query = supabase.from("accordion").select("*").eq("short_id", slug);
+	if (!slug) {
+		return NextResponse.json({ error: "slug is required" }, { status: 400 });
 	}
 
-	if (!query) {
-		return NextResponse.json({ error: "ID is required" }, { status: 400 });
-	}
+	const	query = supabase.from("accordion").select("*").eq("slug_id", slug);
 
 	const { data, error } = await query;
 

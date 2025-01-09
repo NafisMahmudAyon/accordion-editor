@@ -107,7 +107,7 @@ const Page = () => {
         }
         fetchAccordions()
         alert("Accordion moved to trash successfully!");
-      } else if (postStatus === "trash" && status !=="draft") {
+      } else if (postStatus === "trash" && status !== "draft") {
         // Show confirmation alert before deleting
         const confirmDelete = window.confirm(
           "This action will permanently delete the accordion. Are you want to proceed?"
@@ -135,7 +135,7 @@ const Page = () => {
         }
         alert("Accordion deleted successfully!");
         fetchAccordions()
-      } else if (status==="draft") {
+      } else if (status === "draft") {
         // Delete the accordion
         const response = await fetch(`/api/accordion/update-status`, {
           method: "PATCH",
@@ -392,8 +392,6 @@ const Page = () => {
     return <div>Please log in to see your accordions.</div>;
   }
 
-  console.log(accordionData);
-
   return (
     <div className='container mx-auto'>
       <h1>Your Accordions</h1>
@@ -403,6 +401,7 @@ const Page = () => {
         items={options.items}
         updateItem={updateItem}
       /> */ }
+
       {!accordionData && <Dashboard
         // key={currentPage}
         totalPages={totalPages}
@@ -417,7 +416,7 @@ const Page = () => {
         startCopying={startCopying}
         selectedAccordions={selectedAccordions}
         setSelectedAccordions={setSelectedAccordions}
-        // handleBulkUpdate={handleBulkUpdate}
+      // handleBulkUpdate={handleBulkUpdate}
       />}
       {accordionData && (
         <>

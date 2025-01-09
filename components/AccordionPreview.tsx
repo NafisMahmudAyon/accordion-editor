@@ -60,6 +60,7 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 					iconEnabled={globalOptions.iconEnabled}
 					iconPosition={globalOptions.iconPosition}
 					className={`${globalOptions.accordionClassName} ${quickView ? "w-full max-w-[600px]" : ""}`}
+					multiple={globalOptions.multiple}
 					reset={true}>
 					{items.map((item, index) => {
 						return (
@@ -113,7 +114,7 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 							/> */}
 
 								{!quickView && (
-									<AccordionContent className={item.contentClassName}>
+									<AccordionContent className={cn(globalOptions.contentClassName, item.contentClassName)}>
 										{preview ? (
 											<div dangerouslySetInnerHTML={{ __html: item.content }} />
 										) : (
@@ -128,7 +129,7 @@ const AccordionPreview: React.FC<AccordionPreviewProps> = ({
 								)}
 								{quickView && (
 									<AccordionContent
-										className={item.contentClassName}
+										className={cn(globalOptions.contentClassName, item.contentClassName)}
 									>
 										<div dangerouslySetInnerHTML={{ __html: item.content }} />
 									</AccordionContent>

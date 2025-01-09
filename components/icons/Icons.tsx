@@ -7,6 +7,7 @@ import Popover from "../Popover";
 interface IconProps{
 	label?: string;
 	val: string;
+	type?: string;
 	update: (value: string) => void;
 	updateIconType: (value: string) => void;
 }
@@ -14,10 +15,11 @@ interface IconProps{
 const Icons: React.FC<IconProps> = ({
 	label = "Select Icon",
 	val,
+	type="solid",
 	update,
 	updateIconType,
 }) => {
-	const [iconType, setIconType] = useState("solid");
+	const [iconType, setIconType] = useState(type);
 	const [open, setOpen] = useState(false);
 
 	// Memoize the icons list and map for performance
@@ -34,7 +36,7 @@ const Icons: React.FC<IconProps> = ({
 	const SelectedIcon = iconsMap[val];
 
 	return (
-		<div className="flex flex-col gap-2 text-[11px] font-medium text-primary-900 dark:text-primary-900">
+		<div className="flex flex-col gap-2 text-[11px] text-primary-900 dark:text-primary-900">
 			<div className="flex items-center justify-between">
 				<span>{label}</span>
 				<Popover position="bottom" isOpen={open} content={<div className="p-3 bg-primary-200 max-h-[300px] overflow-y-auto light-scrollbar">
@@ -70,7 +72,7 @@ const Icons: React.FC<IconProps> = ({
 							return (
 								<button
 									key={i}
-									className="flex items-center flex-col text-center p-2 focus:outline-none"
+									className={`${icon.name===val ? "border border-primary-900/50 rounded-md" : ""} hover:border-primary-900/50 border border-transparent transition-colors duration-150 rounded-md ease-in-out flex items-center flex-col text-center p-2 focus:outline-none`}
 									onClick={() => {
 										update(icon.name);
 										updateIconType(iconType);
@@ -78,7 +80,7 @@ const Icons: React.FC<IconProps> = ({
 									}}
 									aria-label={icon.name}
 								>
-									<Icon className="w-6 h-6 text-gray-600" />
+									<Icon className={'w-6 h-6 text-gray-600'} />
 									{/* <span className="text-xs font-light tracking-wide mt-1">
 											{icon.name}
 										</span> */}
@@ -89,7 +91,7 @@ const Icons: React.FC<IconProps> = ({
 				</div>}>
 				<button
 					onClick={() => setOpen(!open)}
-					className="p-2 border border-primary-900 rounded-md"
+					className="p-1 border border-primary-900 rounded-md"
 					aria-haspopup="true"
 					aria-expanded={open}
 					aria-label="Select an icon"

@@ -9,23 +9,21 @@ import { GlobalOptionsType } from "./Global";
 
 interface AccordionGlobalOptionsProps {
 	globalOptions: GlobalOptionsType;
-	isAccordion: boolean;
-	setIsAccordion: React.Dispatch<React.SetStateAction<boolean>>;
+	isAccordion?: boolean;
+	setIsAccordion?: React.Dispatch<React.SetStateAction<boolean>>;
 	itemsLength: number;
 	updateGlobalOption: (key: string, value: string | boolean | number | number[]) => void;
 }
 
 const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 	globalOptions,
-	isAccordion = true,
-	setIsAccordion,
 	itemsLength,
 	updateGlobalOption,
 }) => {
 	return (
 		<>
 			{/* checkbox for isAccordion is true then Accordion else Tabs */}
-			<div className="flex gap-2">
+			{/* <div className="flex gap-2">
 				<label>
 					<input
 						type="checkbox"
@@ -48,7 +46,7 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 					/>
 					Tabs
 				</label>
-			</div>
+			</div> */}
 			<Tabs defaultActive="item-1">
 				<TabList className="px-3">
 					<TabItem
@@ -65,6 +63,13 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 					</TabItem>
 				</TabList>
 				<TabContent id="item-1" className="space-y-3 py-3 px-3">
+					<Switch
+						checked={globalOptions?.multiple}
+						onChange={(value) => updateGlobalOption("multiple", value)}
+						label="Multiple Open"
+						labelClassName="text-[11px] ml-0 text-primary-900 dark:text-primary-900"
+						className="flex-row-reverse justify-between w-full"
+					/>
 					<Switch
 						checked={globalOptions?.iconEnabled}
 						onChange={(value) => updateGlobalOption("iconEnabled", value)}
@@ -87,6 +92,7 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 							<Icons
 								label="Active Icon"
 								val={globalOptions?.activeIcon}
+								type={globalOptions?.activeIconType}
 								update={(value: string) => updateGlobalOption("activeIcon", value)}
 								updateIconType={(value: string) =>
 									updateGlobalOption("activeIconType", value)
@@ -95,6 +101,7 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 							<Icons
 								label="Inactive Icon"
 								val={globalOptions?.inactiveIcon}
+								type={globalOptions?.inactiveIconType}
 								update={(value: string) => updateGlobalOption("inactiveIcon", value)}
 								updateIconType={(value: string) =>
 									updateGlobalOption("inactiveIconType", value)
@@ -183,13 +190,12 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 					)}
 				</TabContent>
 				<TabContent id="item-2" className="space-y-3 py-3 px-3">
-					a
 					<TailwindInput
 						val={globalOptions?.accordionClassName}
 						update={(value) => updateGlobalOption("accordionClassName", value)}
 						label="Accordion Class Name"
 					/>
-					{/* <TailwindInput
+					<TailwindInput
 						val={globalOptions?.headerClassName}
 						update={(value) => updateGlobalOption("headerClassName", value)}
 						label="Header Class Name"
@@ -217,7 +223,7 @@ const AccordionGlobalOptions: React.FC<AccordionGlobalOptionsProps> = ({
 						val={globalOptions?.contentClassName}
 						update={(value) => updateGlobalOption("contentClassName", value)}
 						label="Content Class Name"
-					/> */}
+					/>
 				</TabContent>
 			</Tabs>
 		</>

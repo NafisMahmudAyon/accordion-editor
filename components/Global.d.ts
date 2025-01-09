@@ -1,19 +1,19 @@
 export interface GlobalOptionsType {
 	multiple: boolean;
-	activeIcon: string;
 	isVertical: boolean;
 	activeItems: number[];
 	iconEnabled: boolean;
 	isAccordion: boolean;
 	iconPosition: "right" | "left" | undefined;
+	activeIcon: string;
 	inactiveIcon: string;
-	tabsClassName: string;
 	activeIconType: string;
+	inactiveIconType: string;
+	tabsDefaultActive: number;
+	tabsClassName: string;
 	labelClassName: string;
 	headerClassName: string;
 	contentClassName: string;
-	inactiveIconType: string;
-	tabsDefaultActive: number;
 	accordionClassName: string;
 	tabsLabelClassName: string;
 	activeIconClassName: string;
@@ -31,12 +31,12 @@ export interface ItemOptionsType {
 	iconEnabled: boolean;
 	iconPosition: "right" | "left" | undefined;
 	inactiveIcon: string;
-	iconClassName: string;
 	activeIconType: string;
+	inactiveIconType: string;
+	iconClassName: string;
 	labelClassName: string;
 	headerClassName: string;
 	contentClassName: string;
-	inactiveIconType: string;
 	accordionClassName: string;
 	activeIconClassName: string;
 	navigationClassName: string;

@@ -1,16 +1,9 @@
 import { supabase } from "@/components/supabaseClient";
+import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
 	const { user_id, title, content, status } = await request.json();
-
-	// Debug the incoming payload
-	console.log("Payload received on the server:", {
-		user_id,
-		title,
-		content,
-		status,
-	});
 
 	// Validate required fields
 	if (!user_id || !title || !content || !status) {
@@ -30,10 +23,12 @@ export async function POST(request: Request) {
 	}
 
 	try {
+		// create short id 
+		const shortId = nanoid(6)
 		// Insert into the `accordion` table
 		const { data, error } = await supabase
 			.from("accordion")
-			.insert([{ user_id, title, content, status }]);
+			.insert([{ user_id, title, content, status, short_id: shortId }]);
 
 		if (error) {
 			console.error("Supabase error:", error);

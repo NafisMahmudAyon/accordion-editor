@@ -32,7 +32,7 @@ const Select: React.FC<SelectProps> = ({
 				<label
 					htmlFor={id}
 					className={cn(
-						"break-all text-body1 !text-[11px]",
+						"break-all !text-[11px]",
 						"text-primary-900 dark:text-primary-900",
 						labelClassName
 					)}>
@@ -43,7 +43,7 @@ const Select: React.FC<SelectProps> = ({
 				name={name}
 				id={id}
 				className={cn(
-					"text-body1 !text-[11px]",
+					"!text-[11px]",
 					"text-primary-900 dark:text-primary-900",
 					selectClassName
 				)}

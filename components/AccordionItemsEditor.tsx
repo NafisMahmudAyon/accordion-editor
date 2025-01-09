@@ -12,7 +12,6 @@ import {
 import { Button } from "aspect-ui/Button";
 import { Switch } from "aspect-ui/Switch";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
-import React from "react";
 import { ReactSortable } from "react-sortablejs";
 import Icons from "./icons/Icons";
 import Select from "./Select";
@@ -21,6 +20,7 @@ import { Input } from "aspect-ui/Input";
 import { Tooltip, TooltipAction, TooltipContent } from "aspect-ui/Tooltip";
 import Editor from "./Editor";
 import { ItemOptionsType } from "./Global";
+import TailwindInput from "./TailwindInput";
 
 interface AccordionItemsEditorProps {
 	items: ItemOptionsType[];
@@ -111,8 +111,8 @@ const AccordionItemsEditor = ({
 											<Tooltip direction="top" arrowColor="#a9cdcf">
 												<TooltipAction
 													className="bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-1 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-pointer"
-													>
-													<DocumentDuplicateIcon className="size-5" onClick={() => copyItem(index)}/>
+												>
+													<DocumentDuplicateIcon className="size-5" onClick={() => copyItem(index)} />
 												</TooltipAction>
 												<TooltipContent>
 													<p
@@ -125,8 +125,8 @@ const AccordionItemsEditor = ({
 											<Tooltip direction="top" arrowColor="#a9cdcf">
 												<TooltipAction
 													className="bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-1 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-pointer"
-													>
-													<TrashIcon className="size-5" onClick={() => deleteItem(index)}/>
+												>
+													<TrashIcon className="size-5" onClick={() => deleteItem(index)} />
 												</TooltipAction>
 												<TooltipContent>
 													<p
@@ -196,15 +196,19 @@ const AccordionItemsEditor = ({
 													onChange={(value) =>
 														updateItem(index, "headerLabel", value.target.value)
 													}
-													className=""
+													className="ps-3 bg-transparent dark:bg-transparent"
+													labelClassName="font-normal text-[11px] text-primary-900 dark:text-primary-900"
 												/>
 
-												<Editor
-													value={item.content || ""}
-													onChange={(value) =>
-														updateItem(index, "content", value)
-													}
-												/>
+												<div className="">
+													<label className="font-normal text-[11px] text-primary-900 dark:text-primary-900">{`Content ${index + 1}`}</label>
+													<Editor
+														value={item.content || ""}
+														onChange={(value) =>
+															updateItem(index, "content", value)
+														}
+													/>
+												</div>
 
 												{/* <RichTextEditor
 													value={item.content || ""}
@@ -277,8 +281,7 @@ const AccordionItemsEditor = ({
 												)}
 											</TabContent>
 											<TabContent id="item-2" className="space-y-3">
-												a
-												{/* <TailwindInput
+												<TailwindInput
 													val={item?.headerClassName}
 													update={(value) =>
 														updateItem(index, "headerClassName", value)
@@ -312,7 +315,7 @@ const AccordionItemsEditor = ({
 														updateItem(index, "contentClassName", value)
 													}
 													label="Content Class Name"
-												/> */}
+												/>
 											</TabContent>
 										</Tabs>
 									</AccordionContent>
