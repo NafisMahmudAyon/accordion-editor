@@ -8,7 +8,7 @@ interface IconSelectorProps{
 	className?: string
 }
 
-const IconSelector: React.FC<IconSelectorProps> = ({ iconType, iconName, className = "" }) => {
+const IconSelector: React.FC<IconSelectorProps> = ({ iconType, iconName, className = "", ...rest }) => {
 	// Determine the icon list based on the type
 	const iconList = useMemo(
 		() => (iconType === "solid" ? iconsListSolid : iconsListOutline),
@@ -24,7 +24,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({ iconType, iconName, classNa
 	// Select the icon component
 	const SelectedIcon = iconMap[iconName] || null;
 
-	return SelectedIcon ? <SelectedIcon className={className} /> : null;
+	return SelectedIcon ? <SelectedIcon className={className} {...rest} /> : null;
 };
 
 export default IconSelector;
